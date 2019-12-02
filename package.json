@@ -1,0 +1,22 @@
+{
+  "name": "aoc-2019",
+  "version": "1.0.0",
+  "description": "Advent of Code 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monkeyandres/aoc-2019.git"
+  },
+  "author": "monkeyandres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monkeyandres/aoc-2019/issues"
+  },
+  "homepage": "https://github.com/monkeyandres/aoc-2019#readme",
+  "dependencies": {
+    "jest": "^24.9.0"
+  }
+}
