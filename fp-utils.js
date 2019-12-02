@@ -16,4 +16,23 @@ const updateAtIndex = curry((index, value, arr) => {
 
 const nth = curry((index, arr) => arr[index])
 
-module.exports = { curry, pipe, reduce, split, map, updateAtIndex, nth }
+const isNil = val => val === undefined || val === null
+
+const tap = curry((fn, value) => {
+  fn(value)
+  return value
+})
+
+const log = tap(console.log)
+
+module.exports = {
+  curry,
+  pipe,
+  reduce,
+  split,
+  map,
+  updateAtIndex,
+  nth,
+  isNil,
+  log,
+}
