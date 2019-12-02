@@ -7,4 +7,13 @@ const reduce = curry((fn, acc, arr) => arr.reduce(fn, acc))
 
 const split = curry((separator, item) => item.split(separator))
 
-module.exports = { curry, pipe, reduce, split }
+const map = curry((fn, arr) => arr.map(fn))
+
+const updateAtIndex = curry((index, value, arr) => {
+  arr[index] = value
+  return arr
+})
+
+const nth = curry((index, arr) => arr[index])
+
+module.exports = { curry, pipe, reduce, split, map, updateAtIndex, nth }
