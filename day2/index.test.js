@@ -9,4 +9,9 @@ testDay(2, [
     fn: part1,
     io: [{ input: finalInput, output: 4462686 }],
   },
+
+  {
+    fn: part2,
+    io: [{ input: finalInput, output: 5936 }],
+  },
 ])

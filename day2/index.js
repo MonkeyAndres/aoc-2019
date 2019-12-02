@@ -1,8 +1,8 @@
-const fp = require('../fp-utils')
+const F = require('../fp-utils')
 
-const parseInput = fp.pipe(fp.split(','), fp.map(Number))
+const parseInput = F.pipe(F.split(','), F.map(Number))
 
-const run = input => {
+const runner = input => {
   const cloneInput = [...input]
 
   for (let i = 0; i <= cloneInput.length; i += 4) {
@@ -32,12 +32,32 @@ const run = input => {
   }
 }
 
-const part1 = fp.pipe(
+const runWithNounVerb = (noun, verb) =>
+  F.pipe(setNounVerb(noun, verb), runner, F.nth(0))
+
+const setNounVerb = (noun, verb) =>
+  F.pipe(F.updateAtIndex(1, noun), F.updateAtIndex(2, verb))
+
+// PART 1
+const part1 = F.pipe(parseInput, runWithNounVerb(12, 2))
+
+// PART 2
+const getNounVerb = F.curry((expectedValue, formattedInput) => {
+  for (let n = 0; n <= 99; n++) {
+    for (let v = 0; v <= 99; v++) {
+      const res = runWithNounVerb(n, v)(formattedInput)
+
+      if (res === expectedValue) {
+        return [n, v]
+      }
+    }
+  }
+})
+
+const part2 = F.pipe(
   parseInput,
-  fp.updateAtIndex(1, 12),
-  fp.updateAtIndex(2, 2),
-  run,
-  fp.nth(0),
+  getNounVerb(19690720),
+  ([noun, verb]) => 100 * noun + verb,
 )
 
-module.exports = { part1 }
+module.exports = { part1, part2 }
