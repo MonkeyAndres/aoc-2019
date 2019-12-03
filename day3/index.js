@@ -2,7 +2,7 @@ const F = require('../fp-utils')
 
 const parseInput = F.pipe(F.split('\n'), F.map(F.split(',')))
 
-const safetyIncrement = ([x, y], arr) => {
+const safetyIncrementPosition = ([x, y], arr) => {
   if (!arr[y]) {
     arr[y] = []
   }
@@ -10,48 +10,51 @@ const safetyIncrement = ([x, y], arr) => {
   arr[y][x] = arr[y][x] ? arr[y][x] + 1 : 1
 }
 
-const calculateWirePath = (wire, manhattan) => {
-  const actualPos = [0, 0]
+const calculateWirePath = (wire, board) => {
+  const actualPosition = [0, 0]
+  const safetyBoard = board ? [...board] : []
 
-  wire.forEach(instruction => {
+  return wire.reduce((acc, instruction) => {
     const direction = instruction.charAt(0)
     const steps = Number(instruction.substring(1))
 
     switch (direction) {
       case 'R': {
         for (let i = 1; i <= steps; i++) {
-          actualPos[0] += 1
-          safetyIncrement(actualPos, manhattan)
+          actualPosition[0] += 1
+          safetyIncrementPosition(actualPosition, acc)
         }
 
         break
       }
       case 'D': {
         for (let i = 1; i <= steps; i++) {
-          actualPos[1] -= 1
-          safetyIncrement(actualPos, manhattan)
+          actualPosition[1] -= 1
+          safetyIncrementPosition(actualPosition, acc)
         }
 
         break
       }
       case 'U': {
         for (let i = 1; i <= steps; i++) {
-          actualPos[1] += 1
-          safetyIncrement(actualPos, manhattan)
+          actualPosition[1] += 1
+          safetyIncrementPosition(actualPosition, acc)
         }
 
         break
       }
       case 'L': {
         for (let i = 1; i <= steps; i++) {
-          actualPos[0] -= 1
-          safetyIncrement(actualPos, manhattan)
+          actualPosition[0] -= 1
+          safetyIncrementPosition(actualPosition, acc)
         }
 
         break
       }
     }
-  })
+
+    return acc
+  }, safetyBoard)
 }
 
 const findCloserIntersection = manhattan => {
@@ -59,21 +62,16 @@ const findCloserIntersection = manhattan => {
     const x = manhattan[y].indexOf(2)
 
     if (x > 0) {
-      return [y, x]
+      return [x, Number(y)]
     }
   }
 }
 
-const part1 = input => {
-  const [wire1, wire2] = parseInput(input)
-  const manhattan = []
-
-  calculateWirePath(wire1, manhattan)
-  calculateWirePath(wire2, manhattan)
-
-  const intersectionPoint = findCloserIntersection(manhattan)
-
-  return Number(intersectionPoint[0]) + Number(intersectionPoint[1])
-}
+const part1 = F.pipe(
+  parseInput,
+  ([w1, w2]) => calculateWirePath(w2, calculateWirePath(w1)),
+  findCloserIntersection,
+  F.apply(F.add),
+)
 
 module.exports = { part1 }

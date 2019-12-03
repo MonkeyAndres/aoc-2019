@@ -26,6 +26,10 @@ const tap = curry((fn, value) => {
 
 const log = tap(console.log)
 
+const apply = curry((fn, arr) => fn(...arr))
+
+const add = curry((a, b) => a + b)
+
 module.exports = {
   curry,
   pipe,
@@ -35,5 +39,8 @@ module.exports = {
   updateAtIndex,
   nth,
   isNil,
+  tap,
   log,
+  apply,
+  add,
 }
