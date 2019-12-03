@@ -30,6 +30,21 @@ const apply = curry((fn, arr) => fn(...arr))
 
 const add = curry((a, b) => a + b)
 
+const isObject = val => val === Object(val)
+
+const equals = (a, b) => {
+  const areArrays = Array.isArray(a) && Array.isArray(b)
+  const areObjects = isObject(a) && isObject(b)
+
+  if (areArrays && a.length === b.length) {
+    return a.every((item, index) => equals(item, b[index]))
+  } else if (!areArrays && areObjects) {
+    return equals(Object.entries(a), Object.entries(b))
+  }
+
+  return a === b
+}
+
 module.exports = {
   curry,
   pipe,
@@ -43,4 +58,5 @@ module.exports = {
   log,
   apply,
   add,
+  equals,
 }
