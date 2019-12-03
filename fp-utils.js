@@ -10,8 +10,9 @@ const split = curry((separator, item) => item.split(separator))
 const map = curry((fn, arr) => arr.map(fn))
 
 const updateAtIndex = curry((index, value, arr) => {
-  arr[index] = value
-  return arr
+  const newArr = [...arr]
+  newArr[index] = value
+  return newArr
 })
 
 const nth = curry((index, arr) => arr[index])
