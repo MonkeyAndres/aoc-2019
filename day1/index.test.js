@@ -2,9 +2,10 @@ const { testDay } = require('../testing-utils')
 const { readInput } = require('../utils')
 const { part1, part2 } = require('./index')
 
-const finalInput = readInput(1)
+const DAY = 1
+const finalInput = readInput(DAY)
 
-testDay(1, [
+testDay(DAY, [
   {
     fn: part1,
     io: [
