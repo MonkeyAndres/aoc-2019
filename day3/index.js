@@ -1,3 +1,7 @@
+/**
+ * ATTENTION: INCOMPLETE SOLUTION AND LOW PERFORMANCE
+ */
+
 const F = require('../fp-utils')
 
 const DEFAULT_POSITION = [0, 0]
