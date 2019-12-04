@@ -2,11 +2,12 @@ const F = require('../fp-utils')
 
 const parseInput = F.pipe(F.split('-'), F.map(Number))
 
-const predicate = n => {
-  const nString = String(n)
+// PART 1
+const matchNormalPassword = num => {
+  const nString = String(num)
 
   let decreasingNumbers = true
-  let adyacentEquals = false
+  let anyAdyacentEquals = false
 
   for (let i = 0; i < nString.length - 1; i++) {
     const n1 = Number(nString.charAt(i))
@@ -17,18 +18,52 @@ const predicate = n => {
     }
 
     if (n1 === n2) {
-      adyacentEquals = true
+      anyAdyacentEquals = true
     }
   }
 
-  return decreasingNumbers && adyacentEquals
+  return decreasingNumbers && anyAdyacentEquals
 }
 
 const part1 = F.pipe(
   parseInput,
   F.apply(F.range),
-  F.filter(predicate),
+  F.filter(matchNormalPassword),
   F.length,
 )
 
-module.exports = { part1 }
+// PART 2
+const matchRestrictPassword = num => {
+  const nString = String(num)
+
+  let decreasingNumbers = true
+
+  for (let i = 0; i < nString.length - 1; i++) {
+    const n1 = Number(nString.charAt(i))
+    const n2 = Number(nString.charAt(i + 1))
+
+    if (n1 > n2) {
+      decreasingNumbers = false
+    }
+  }
+
+  const groupedValues = Object.values(nString).reduce(function(acc, item) {
+    if (acc.length && item === acc[acc.length - 1][0]) {
+      acc[acc.length - 1].push(item)
+    } else {
+      acc.push([item])
+    }
+    return acc
+  }, [])
+
+  return decreasingNumbers && groupedValues.some(item => item.length === 2)
+}
+
+const part2 = F.pipe(
+  parseInput,
+  F.apply(F.range),
+  F.filter(matchRestrictPassword),
+  F.length,
+)
+
+module.exports = { part1, matchNormalPassword, part2, matchRestrictPassword }

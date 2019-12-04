@@ -1,4 +1,6 @@
-const testDay = (day, parts) =>
+const F = require('./fp-utils')
+
+const testDay = (day, parts = [], rest = F.identity) =>
   describe(`Day ${day}`, () => {
     it('works', () => {
       expect(true).toBe(true)
@@ -14,6 +16,8 @@ const testDay = (day, parts) =>
           })
         })
     })
+
+    rest()
   })
 
 module.exports = { testDay }
