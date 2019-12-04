@@ -1,13 +1,18 @@
 const testDay = (day, parts) =>
   describe(`Day ${day}`, () => {
-    parts.forEach(({ fn, io }, index) => {
-      describe(`Part ${index + 1}`, () => {
-        io.forEach(({ input, output }, i) => {
-          it(`expect ${i}`, () => {
-            expect(fn(input)).toBe(output)
+    it('works', () => {
+      expect(true).toBe(true)
+    })
+
+    parts.forEach(({ fn, io, disable }, index) => {
+      !disable &&
+        describe(`Part ${index + 1}`, () => {
+          io.forEach(({ input, output }, i) => {
+            it(`expect ${i}`, () => {
+              expect(fn(input)).toBe(output)
+            })
           })
         })
-      })
     })
   })
 
