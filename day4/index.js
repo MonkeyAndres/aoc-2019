@@ -1,29 +1,49 @@
 const F = require('../fp-utils')
 
+const DEFAULT_MIN_GROUP_LENGTH = 2
+const GROUP_LENGTH = 2
+
 const parseInput = F.pipe(F.split('-'), F.map(Number))
 
-// PART 1
-const matchNormalPassword = num => {
+const decreasingNumbers = num => {
   const nString = String(num)
-
-  let decreasingNumbers = true
-  let anyAdyacentEquals = false
 
   for (let i = 0; i < nString.length - 1; i++) {
     const n1 = Number(nString.charAt(i))
     const n2 = Number(nString.charAt(i + 1))
 
     if (n1 > n2) {
-      decreasingNumbers = false
-    }
-
-    if (n1 === n2) {
-      anyAdyacentEquals = true
+      return false
     }
   }
 
-  return decreasingNumbers && anyAdyacentEquals
+  return true
 }
+
+const adjacentEquals = groupLength => num => {
+  const nString = String(num)
+
+  const groupedValues = Object.values(nString).reduce((acc, item) => {
+    const lastGroupIndex = acc.length - 1
+
+    if (acc.length && item === acc[lastGroupIndex][0]) {
+      acc[lastGroupIndex].push(item)
+    } else {
+      acc.push([item])
+    }
+
+    return acc
+  }, [])
+
+  return groupLength
+    ? // At least one group with "groupLength" elements
+      groupedValues.some(item => item.length === groupLength)
+    : // At least one group with minimum "DEFAULT_MIN_GROUP_LENGTH" elements
+      groupedValues.some(item => item.length >= DEFAULT_MIN_GROUP_LENGTH)
+}
+
+// PART 1
+const matchNormalPassword = F.allPass([decreasingNumbers, adjacentEquals()])
 
 const part1 = F.pipe(
   parseInput,
@@ -33,31 +53,10 @@ const part1 = F.pipe(
 )
 
 // PART 2
-const matchRestrictPassword = num => {
-  const nString = String(num)
-
-  let decreasingNumbers = true
-
-  for (let i = 0; i < nString.length - 1; i++) {
-    const n1 = Number(nString.charAt(i))
-    const n2 = Number(nString.charAt(i + 1))
-
-    if (n1 > n2) {
-      decreasingNumbers = false
-    }
-  }
-
-  const groupedValues = Object.values(nString).reduce(function(acc, item) {
-    if (acc.length && item === acc[acc.length - 1][0]) {
-      acc[acc.length - 1].push(item)
-    } else {
-      acc.push([item])
-    }
-    return acc
-  }, [])
-
-  return decreasingNumbers && groupedValues.some(item => item.length === 2)
-}
+const matchRestrictPassword = F.allPass([
+  decreasingNumbers,
+  adjacentEquals(GROUP_LENGTH),
+])
 
 const part2 = F.pipe(
   parseInput,
