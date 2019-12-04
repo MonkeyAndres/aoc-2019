@@ -1,3 +1,5 @@
+const identity = a => a
+
 const curry = fn => (...args) =>
   args.length >= fn.length ? fn(...args) : fn.bind(null, ...args)
 
@@ -8,6 +10,8 @@ const reduce = curry((fn, acc, arr) => arr.reduce(fn, acc))
 const split = curry((separator, item) => item.split(separator))
 
 const map = curry((fn, arr) => arr.map(fn))
+
+const filter = curry((fn, arr) => arr.filter(fn))
 
 const updateAtIndex = curry((index, value, arr) => {
   const newArr = [...arr]
@@ -45,12 +49,30 @@ const equals = (a, b) => {
   return a === b
 }
 
+const range = curry((from, to) => {
+  const result = []
+
+  for (let i = from; i <= to; i++) {
+    result.push(i)
+  }
+
+  return result
+})
+
+const length = curry(val =>
+  typeof val == 'number' ? String(val).length : Object.values(val).length,
+)
+
+const complement = curry((fn, val) => !fn(val))
+
 module.exports = {
+  identity,
   curry,
   pipe,
   reduce,
   split,
   map,
+  filter,
   updateAtIndex,
   nth,
   isNil,
@@ -59,4 +81,7 @@ module.exports = {
   apply,
   add,
   equals,
+  range,
+  length,
+  complement,
 }
