@@ -44,6 +44,18 @@ const length = curry(val =>
   typeof val == 'number' ? String(val).length : Object.values(val).length,
 )
 
+// OBJECT
+const omit = curry((keys, obj) => {
+  const newObj = { ...obj }
+  const safetyKeys = Array.isArray(keys) ? keys : [keys]
+
+  for (let key of safetyKeys) {
+    delete newObj[key]
+  }
+
+  return newObj
+})
+
 // STRING
 const split = curry((separator, item) => item.split(separator))
 
@@ -102,4 +114,5 @@ module.exports = {
   length,
   complement,
   allPass,
+  omit,
 }
