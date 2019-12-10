@@ -11,7 +11,7 @@ const testDay = (day, parts = [], rest = F.identity) =>
         describe(`Part ${index + 1}`, () => {
           io.forEach(({ input, output }, i) => {
             it(`expect ${i}`, () => {
-              expect(fn(input)).toBe(output)
+              expect(fn(input)).toStrictEqual(output)
             })
           })
         })
