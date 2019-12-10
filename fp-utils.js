@@ -44,6 +44,12 @@ const length = curry(val =>
   typeof val == 'number' ? String(val).length : Object.values(val).length,
 )
 
+const take = curry((length, list) => {
+  const newList = [...list]
+  newList.length = length
+  return newList
+})
+
 // OBJECT
 const omit = curry((keys, obj) => {
   const newObj = { ...obj }
@@ -55,6 +61,8 @@ const omit = curry((keys, obj) => {
 
   return newObj
 })
+
+const prop = curry((name, obj) => obj[name])
 
 // STRING
 const split = curry((separator, item) => item.split(separator))
@@ -115,4 +123,6 @@ module.exports = {
   complement,
   allPass,
   omit,
+  take,
+  prop,
 }
