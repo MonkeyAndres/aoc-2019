@@ -17,8 +17,6 @@ const OPCODES = {
   halt: 99,
 }
 
-let lastOutput
-
 const parseInput = F.pipe(F.split(','), F.map(Number))
 
 const getValuePointer = (instruction, ip, input) => {
