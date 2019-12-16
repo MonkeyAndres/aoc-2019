@@ -67,6 +67,10 @@ const prop = curry((name, obj) => obj[name])
 // STRING
 const split = curry((separator, item) => item.split(separator))
 
+const occurrences = curry(
+  (regexp, str) => (str.match(new RegExp(regexp, 'g')) || []).length,
+)
+
 // TYPE
 const isNil = val => val === undefined || val === null
 
@@ -125,4 +129,5 @@ module.exports = {
   omit,
   take,
   prop,
+  occurrences,
 }
