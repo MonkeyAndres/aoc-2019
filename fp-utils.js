@@ -16,7 +16,9 @@ const log = tap(console.log)
 const apply = curry((fn, arr) => fn(...arr))
 
 // LIST
-const reduce = curry((fn, acc, arr) => arr.reduce(fn, acc))
+const reduce = curry((fn, acc, arr) =>
+  acc === undefined ? arr.reduce(fn) : arr.reduce(fn, acc),
+)
 
 const map = curry((fn, arr) => arr.map(fn))
 
@@ -50,6 +52,8 @@ const take = curry((length, list) => {
   return newList
 })
 
+const join = curry((separator, list) => list.join(separator))
+
 // OBJECT
 const omit = curry((keys, obj) => {
   const newObj = { ...obj }
@@ -69,6 +73,10 @@ const split = curry((separator, item) => item.split(separator))
 
 const occurrences = curry(
   (regexp, str) => (str.match(new RegExp(regexp, 'g')) || []).length,
+)
+
+const replace = curry((searchValue, replaceValue, list) =>
+  list.replace(searchValue, replaceValue),
 )
 
 // TYPE
@@ -130,4 +138,6 @@ module.exports = {
   take,
   prop,
   occurrences,
+  join,
+  replace,
 }
