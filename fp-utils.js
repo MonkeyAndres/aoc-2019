@@ -4,7 +4,7 @@ const identity = a => a
 const curry = fn => {
   return function curried(...args) {
     const done = args.length >= fn.length
-    return done ? fn(...args) : (...rest) => curried(...[...args, ...rest])
+    return done ? fn(...args) : (...rest) => curried(...args, ...rest)
   }
 }
 
@@ -21,9 +21,7 @@ const apply = curry((fn, arr) => fn(...arr))
 
 // LIST
 const reduce = curry((fn, acc, arr) =>
-  console.log({ acc, arr }) || acc === undefined
-    ? arr.reduce(fn)
-    : arr.reduce(fn, acc),
+  acc === undefined ? arr.reduce(fn) : arr.reduce(fn, acc),
 )
 
 const map = curry((fn, arr) => arr.map(fn))
