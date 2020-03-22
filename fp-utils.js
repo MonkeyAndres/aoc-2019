@@ -1,8 +1,12 @@
 // FUNCTION
 const identity = a => a
 
-const curry = fn => (...args) =>
-  args.length >= fn.length ? fn(...args) : fn.bind(null, ...args)
+const curry = fn => {
+  return function curried(...args) {
+    const done = args.length >= fn.length
+    return done ? fn(...args) : (...rest) => curried(...[...args, ...rest])
+  }
+}
 
 const pipe = (...fns) => fns.reduce((acc, fn) => (...args) => fn(acc(...args)))
 
@@ -17,7 +21,9 @@ const apply = curry((fn, arr) => fn(...arr))
 
 // LIST
 const reduce = curry((fn, acc, arr) =>
-  acc === undefined ? arr.reduce(fn) : arr.reduce(fn, acc),
+  console.log({ acc, arr }) || acc === undefined
+    ? arr.reduce(fn)
+    : arr.reduce(fn, acc),
 )
 
 const map = curry((fn, arr) => arr.map(fn))
