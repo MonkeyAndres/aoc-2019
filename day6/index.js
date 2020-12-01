@@ -3,18 +3,15 @@ const F = require('../fp-utils')
 // PART 1
 
 const formatOrbits = (store, item) => {
-  const _store = { ...store }
   const [parent, child] = item.split(')')
 
-  const parentOrbit = _store[parent]
+  const parentOrbit = store[parent]
 
   if (!parentOrbit) {
-    _store[parent] = [child]
+    return { ...store, [parent]: [child] }
   } else {
-    parentOrbit.push(child)
+    return { ...store, [parent]: [...store[parent], child] }
   }
-
-  return _store
 }
 
 const recursiveCountOrbits = (store, center = 'COM', depth = 1) => {
