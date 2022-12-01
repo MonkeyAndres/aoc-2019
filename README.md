@@ -15,8 +15,6 @@ npm test
 
 ## Progress
 
-## Progress
-
 | Kata                                                    | Part 1 | Part 2 |
 | ------------------------------------------------------- | ------ | ------ |
 | [1 - The Tyranny of the Rocket Equation](day1/index.js) | ⭐️      | ⭐️      |
@@ -27,5 +25,20 @@ npm test
 | [6 - Universal Orbit Map](day6/index.js)                | ⭐️      | ⭐️      |
 | 7 - Amplification Circuit                               | ❌      | ❌      |
 | [8 - Space Image Format](day8/index.js)                 | ⭐️      | ⭐️      |
-
-After day 8 I was unable to advance to more katas because of the complexity and the lack of time.
+| 9 - TBA                                                 |        |        |
+| 10 - TBA                                                |        |        |
+| 11 - TBA                                                |        |        |
+| 12 - TBA                                                |        |        |
+| 13 - TBA                                                |        |        |
+| 14 - TBA                                                |        |        |
+| 16 - TBA                                                |        |        |
+| 15 - TBA                                                |        |        |
+| 17 - TBA                                                |        |        |
+| 18 - TBA                                                |        |        |
+| 19 - TBA                                                |        |        |
+| 20 - TBA                                                |        |        |
+| 21 - TBA                                                |        |        |
+| 22 - TBA                                                |        |        |
+| 23 - TBA                                                |        |        |
+| 24 - TBA                                                |        |        |
+| 25 - TBA                                                |        |        |
