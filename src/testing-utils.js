@@ -6,15 +6,20 @@ const testDay = (day, parts = [], rest = F.identity) =>
       expect(true).toBe(true)
     })
 
-    parts.forEach(({ fn, io, disable }, index) => {
-      !disable &&
-        describe(`Part ${index + 1}`, () => {
-          io.forEach(({ input, output }, i) => {
-            it(`expect ${i}`, () => {
-              expect(fn(input)).toStrictEqual(output)
-            })
+    parts.forEach(({ name, fn, io, disable }, index) => {
+      if (disable) {
+        return
+      }
+
+      const testName = name || `Misc test #${index} for day ${day}.`
+
+      describe(testName, () => {
+        io.forEach(({ input, output }) => {
+          it(`expect ${JSON.stringify(output)}`, () => {
+            expect(fn(input)).toStrictEqual(output)
           })
         })
+      })
     })
 
     rest()

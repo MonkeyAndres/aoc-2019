@@ -13,11 +13,13 @@ testDay(
   DAY,
   [
     {
+      name: 'Part 1',
       fn: part1,
       io: [{ input: finalInput, output: 1150 }],
     },
 
     {
+      name: 'Part 2',
       fn: part2,
       io: [{ input: finalInput, output: 748 }],
     },

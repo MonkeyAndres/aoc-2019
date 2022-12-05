@@ -7,6 +7,7 @@ const finalInput = readInput(DAY)
 
 testDay(DAY, [
   {
+    name: 'Part 1',
     fn: part1,
     io: [
       {
@@ -34,6 +35,7 @@ K)L`,
     ],
   },
   {
+    name: 'Part 2',
     fn: part2,
     io: [
       {

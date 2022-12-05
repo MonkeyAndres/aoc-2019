@@ -7,6 +7,7 @@ const finalInput = readInput(DAY)
 
 testDay(DAY, [
   {
+    name: 'Part 1',
     fn: part1,
     disable: true,
     io: [
@@ -30,6 +31,7 @@ U98,R91,D20,R16,D67,R40,U7,R15,U6,R7`,
   },
 
   {
+    name: 'Part 2',
     fn: part2,
     disable: true,
     io: [
