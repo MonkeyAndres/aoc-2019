@@ -19,7 +19,7 @@ testDay(DAY, [
   },
 
   {
-    fn: runner(8),
+    fn: runner([8]),
     io: [
       {
         input: [3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8],

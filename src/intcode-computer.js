@@ -42,6 +42,8 @@ const runner = input => memory => {
   const clonedMemory = [...memory]
   let lastOutput
 
+  let inputCursor = 0
+
   for (let ip = 0; ip <= clonedMemory.length; ) {
     // Instruction: PPPPOO where P are param modes and O the operation code
     const instruction = String(clonedMemory[ip]).padStart(5, '0')
@@ -74,8 +76,9 @@ const runner = input => memory => {
 
       case OPCODES.input: {
         const [p1] = parameters
-        clonedMemory[p1.write] = input
+        clonedMemory[p1.write] = input[inputCursor]
 
+        inputCursor++
         ip += 2
         continue
       }
