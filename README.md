@@ -23,7 +23,7 @@ npm test
 | [4 - Secure Container](src/day04/index.js)                   | ⭐️      | ⭐️      |
 | [5 - Sunny with a Chance of Asteroids](src/day05/index.js)   | ⭐️      | ⭐️      |
 | [6 - Universal Orbit Map](src/day06/index.js)                | ⭐️      | ⭐️      |
-| 7 - Amplification Circuit                                    | ❌      | ❌      |
+| [7 - Amplification Circuit](src/day07/index.js)              | ⭐️      | ❌      |
 | [8 - Space Image Format](src/day08/index.js)                 | ⭐️      | ⭐️      |
 | 9 - TBA                                                      |        |        |
 | 10 - TBA                                                     |        |        |
